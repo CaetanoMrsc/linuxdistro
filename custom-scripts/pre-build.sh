@@ -11,3 +11,7 @@ chmod +x $BASE_DIR/target/etc/init.d/S42systeminfo
 
 # Tutorial 3.1 - SCHED_LOW_IDLE: compila o thread_runner para o alvo
 $HOST_DIR/bin/i686-buildroot-linux-uclibc-gcc -o $BASE_DIR/target/usr/bin/thread_runner $BASE_DIR/../custom-scripts/thread_runner.c -lpthread
+
+# Tutorial 3.1 - Ftrace: monta o tracefs no boot
+grep -q tracefs $BASE_DIR/target/etc/fstab || \
+	echo "tracefs		/sys/kernel/tracing	tracefs	defaults	0	0" >> $BASE_DIR/target/etc/fstab

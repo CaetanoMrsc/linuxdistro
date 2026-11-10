@@ -1,0 +1,45 @@
+From 6a577303d835dd0d6e36988e82f4f00007d0559f Mon Sep 17 00:00:00 2001
+From: CaetanoMrsc <c.marasca@edu.pucrs.br>
+Date: Tue, 10 Nov 2026 20:28:16 -0300
+Subject: [PATCH] Tutorial 3.1 - Ftrace: habilita function e function graph
+ tracer
+
+- qemu_x86_custom_defconfig: CONFIG_FTRACE, CONFIG_FUNCTION_TRACER e
+  CONFIG_FUNCTION_GRAPH_TRACER.
+- kernel/Makefile: compila elfcore.o sem instrumentacao do ftrace; com
+  binutils >= 2.36 o recordmcount falha nele ("Cannot find symbol for
+  section 1: .text").
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ arch/x86/configs/qemu_x86_custom_defconfig | 3 +++
+ kernel/Makefile                            | 2 ++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/arch/x86/configs/qemu_x86_custom_defconfig b/arch/x86/configs/qemu_x86_custom_defconfig
+index a4da99ff..5c67658e 100644
+--- a/arch/x86/configs/qemu_x86_custom_defconfig
++++ b/arch/x86/configs/qemu_x86_custom_defconfig
+@@ -50,3 +50,6 @@ CONFIG_EXT4_FS=y
+ CONFIG_AUTOFS4_FS=y
+ CONFIG_TMPFS=y
+ CONFIG_TMPFS_POSIX_ACL=y
++CONFIG_FTRACE=y
++CONFIG_FUNCTION_TRACER=y
++CONFIG_FUNCTION_GRAPH_TRACER=y
+diff --git a/kernel/Makefile b/kernel/Makefile
+index 4cb8e8b2..2f3792e3 100644
+--- a/kernel/Makefile
++++ b/kernel/Makefile
+@@ -14,6 +14,8 @@ obj-y     = fork.o exec_domain.o panic.o \
+ obj-$(CONFIG_MULTIUSER) += groups.o
+ 
+ ifdef CONFIG_FUNCTION_TRACER
++# binutils >= 2.36: recordmcount cannot handle elfcore.o (empty .text)
++CFLAGS_REMOVE_elfcore.o = $(CC_FLAGS_FTRACE)
+ # Do not trace internal ftrace files
+ CFLAGS_REMOVE_irq_work.o = $(CC_FLAGS_FTRACE)
+ endif
+-- 
+2.55.0
+
