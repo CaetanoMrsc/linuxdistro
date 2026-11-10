@@ -8,3 +8,6 @@ chmod +x $BASE_DIR/target/usr/bin/systeminfo.py
 
 cp $BASE_DIR/../custom-scripts/S42systeminfo $BASE_DIR/target/etc/init.d
 chmod +x $BASE_DIR/target/etc/init.d/S42systeminfo
+
+# Tutorial 3.1 - SCHED_LOW_IDLE: compila o thread_runner para o alvo
+$HOST_DIR/bin/i686-buildroot-linux-uclibc-gcc -o $BASE_DIR/target/usr/bin/thread_runner $BASE_DIR/../custom-scripts/thread_runner.c -lpthread
