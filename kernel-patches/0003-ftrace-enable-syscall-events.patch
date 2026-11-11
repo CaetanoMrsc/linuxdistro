@@ -1,0 +1,26 @@
+From a020849187410d02ffd8b8125b5a1885006705b6 Mon Sep 17 00:00:00 2001
+From: CaetanoMrsc <c.marasca@edu.pucrs.br>
+Date: Wed, 11 Nov 2026 01:12:18 -0300
+Subject: [PATCH] Tutorial 3.2 - trace-cmd: habilita eventos de chamadas de
+ sistema
+
+CONFIG_FTRACE_SYSCALLS, para o trace-cmd registrar syscalls:sys_enter_*
+e sys_exit_*.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ arch/x86/configs/qemu_x86_custom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/x86/configs/qemu_x86_custom_defconfig b/arch/x86/configs/qemu_x86_custom_defconfig
+index 5c67658e..62edc7c1 100644
+--- a/arch/x86/configs/qemu_x86_custom_defconfig
++++ b/arch/x86/configs/qemu_x86_custom_defconfig
+@@ -53,3 +53,4 @@ CONFIG_TMPFS_POSIX_ACL=y
+ CONFIG_FTRACE=y
+ CONFIG_FUNCTION_TRACER=y
+ CONFIG_FUNCTION_GRAPH_TRACER=y
++CONFIG_FTRACE_SYSCALLS=y
+-- 
+2.55.0
+
