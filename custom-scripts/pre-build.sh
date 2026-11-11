@@ -18,3 +18,6 @@ grep -q tracefs $BASE_DIR/target/etc/fstab || \
 
 # Tutorial 3.2 - Atividade 2: cinco threads imprimindo letras
 $HOST_DIR/bin/i686-buildroot-linux-uclibc-gcc -o $BASE_DIR/target/usr/bin/threads $BASE_DIR/../custom-scripts/threads.c -lpthread
+
+# Trabalho sched_profiler
+$HOST_DIR/bin/i686-buildroot-linux-uclibc-gcc -Wall -o $BASE_DIR/target/usr/bin/sched_profiler $BASE_DIR/../custom-scripts/sched_profiler.c -lpthread
